@@ -1,12 +1,12 @@
-function fizzBuzz(n){
-    
-    if (n % 3 === 0 && n % 5 === 0){
+
+    for(let i=1; i<=30; i++){
+    if (i % 3 === 0 && i % 5 === 0){
         console.log("FIZZBUZZ");
-    }else if (n % 3 === 0) {
+    }else if (i % 3 === 0) {
         console.log("FIZZ");
-    }else if (n % 5 === 0){
+    }else if (i % 5 === 0){
         console.log("BUZZ");
     }else{
-        console.log(n);
+        console.log(i);
     }
 }

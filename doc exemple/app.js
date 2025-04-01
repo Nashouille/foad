@@ -29,3 +29,20 @@ btn1.addEventListener("click", function(){
     let element = document.body;
     element.classList.toggle("dark-mode");
 });
+
+
+let btn2 = document.getElementById("button1");
+ let btn3 = document.getElementById("button2");
+
+ function courrir(){
+    document.getElementById('speedyDepart').style.display="none";
+    document.getElementById('speedyCourt').style.display="block";
+}
+
+function restart(){
+    document.getElementById('speedyDepart').style.display="block";
+    document.getElementById('speedyCourt').style.display="none";
+}
+
+btn2.addEventListener("click",courrir);
+btn3.addEventListener("click",restart);

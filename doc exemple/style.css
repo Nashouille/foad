@@ -8,3 +8,23 @@ body{
     background-color: #121212;
     color: #f0f0f0;
 }
+
+
+
+.flex{
+    display:flex;
+    justify-content: space-around;
+}
+    .speedyUn{
+    width:30%;
+    margin-top:150px;
+    margin-left: 230px;
+}
+    .speedyDeux{
+    width: 70%;
+    margin-top:150px;
+    display: none;
+}
+.button{
+    margin-top: 15px;;
+}

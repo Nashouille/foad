@@ -22,3 +22,10 @@ document.addEventListener("DOMContentLoaded", function(){
         alert(monInput);
     });
 });
+
+let btn1 = document.getElementById('btn1');
+
+btn1.addEventListener("click", function(){
+    let element = document.body;
+    element.classList.toggle("dark-mode");
+});

@@ -45,3 +45,113 @@ function addTask() {
         taskInput.value = ''; 
     } 
 } 
+
+const taskText = taskInput.value.trim(); 
+if (taskText !== '') {} 
+const newTask = { 
+    id: Date.now(), // Un ID unique basé sur le timestamp actuel 
+    text: taskText, // Le texte de la tâche 
+completed: false // Non terminée par défaut 
+};
+tasks.push(newTask); 
+saveTasks(); 
+renderTask(newTask); 
+taskInput.value = ''; 
+
+addTaskBtn.addEventListener('click', addTask); 
+taskInput.addEventListener('keypress', function(e) { 
+    if (e.key === 'Enter') { 
+        addTask(); 
+    } 
+}); 
+ 
+function addTask() { 
+    const taskText = taskInput.value.trim(); 
+     
+    if (taskText !== '') { 
+        // Créer un nouvel objet tâche 
+        const newTask = { 
+            id: Date.now(), // Utilisation du timestamp comme ID unique 
+            text: taskText, 
+            completed: false 
+        };
+           // Ajouter la tâche au tableau 
+           tasks.push(newTask); 
+         
+           // Sauvegarder dans le localStorage 
+           saveTasks(); 
+            
+           // Afficher la tâche 
+           renderTask(newTask); 
+            
+           // Vider le champ de saisie 
+           taskInput.value = ''; 
+       } 
+   }
+
+
+   function renderTask(task) { 
+    // Créer l'élément li 
+    const li = document.createElement('li'); 
+    li.className = 'task-item'; 
+    li.dataset.id = task.id; 
+     
+    // Créer la checkbox 
+    const checkbox = document.createElement('input'); 
+    checkbox.type = 'checkbox'; 
+    checkbox.checked = task.completed; 
+    checkbox.addEventListener('change', toggleTask); 
+     
+    // Créer le span pour le texte 
+    const span = document.createElement('span'); 
+    span.className = 'task-text'; 
+    span.textContent = task.text; 
+    if (task.completed) { 
+        span.classList.add('completed'); 
+    } 
+     
+    // Créer le bouton de suppression 
+    const deleteBtn = document.createElement('button'); 
+    deleteBtn.className = 'delete-btn'; 
+    deleteBtn.textContent = 'Supprimer'; 
+    deleteBtn.addEventListener('click', deleteTask); 
+     
+    // Assembler les éléments 
+    li.appendChild(checkbox); 
+    li.appendChild(span); 
+    li.appendChild(deleteBtn); 
+     
+    // Ajouter à la liste 
+    taskList.appendChild(li); 
+} 
+ 
+function loadTasks() { 
+    // Récupérer les tâches depuis le localStorage 
+    const savedTasks = localStorage.getItem('tasks'); 
+     
+    if (savedTasks) { 
+        tasks = JSON.parse(savedTasks); 
+         
+        // Afficher toutes les tâches 
+        tasks.forEach(task => { 
+            renderTask(task); 
+        }); 
+    } 
+} 
+
+function deleteTask(e) { 
+    // Trouver l'ID de la tâche 
+    const taskId = parseInt(e.target.parentElement.dataset.id); 
+     
+    // Filtrer le tableau pour supprimer la tâche 
+    tasks = tasks.filter(task => task.id !== taskId); 
+     
+    // Sauvegarder 
+    saveTasks(); 
+     
+    // Supprimer de l'interface 
+    e.target.parentElement.remove(); 
+} 
+function saveTasks() { 
+    localStorage.setItem('tasks', JSON.stringify(tasks)); 
+    }
